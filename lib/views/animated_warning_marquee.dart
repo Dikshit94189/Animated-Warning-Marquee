@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AnimatedWarningMarquee extends StatefulWidget {
-  final String text;
+  final String? text;
   final TextStyle? textStyle;
   final Color? backgroundColor;
   final Duration scrollDuration;
@@ -9,7 +9,7 @@ class AnimatedWarningMarquee extends StatefulWidget {
 
   const AnimatedWarningMarquee({
     super.key,
-    required this.text,
+      this.text,
     this.textStyle,
     this.backgroundColor = Colors.amber,
     this.scrollDuration = const Duration(seconds: 8),
@@ -120,11 +120,11 @@ class _AnimatedWarningMarqueeState extends State<AnimatedWarningMarquee>
         _textWidth = textPainter.width;
 
         return Text(
-          widget.text,
+          widget.text ?? "  Warning",
           style: widget.textStyle ??
               const TextStyle(
                 color: Colors.black,
-                fontSize: 16,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
         );
