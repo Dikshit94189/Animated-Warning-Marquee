@@ -1,8 +1,14 @@
+import 'package:animatedwarningmarquee/views/ai_caption_generator.dart';
 import 'package:animatedwarningmarquee/views/animated_warning_marquee.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  debugPaintSizeEnabled = false;
+  debugPaintBaselinesEnabled = false;
+  debugRepaintRainbowEnabled = false;
   runApp(const MyApp());
 }
 
@@ -38,12 +44,22 @@ class MyApp extends StatelessWidget {
                   );
                 },
               ),
+
               const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  print("Button 2 pressed");
+              Builder(
+                builder: (context) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (_) => AICaptionGenerator(), // your target page
+                        ),
+                      );
+                    },
+                    child: const Text("Button 2"),
+                  );
                 },
-                child: const Text("Button 2"),
               ),
               const SizedBox(height: 10),
               ElevatedButton(
