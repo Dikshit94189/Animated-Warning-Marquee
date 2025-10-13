@@ -1,5 +1,6 @@
 import 'package:animatedwarningmarquee/views/ai_caption_generator.dart';
 import 'package:animatedwarningmarquee/views/animated_warning_marquee.dart';
+import 'package:animatedwarningmarquee/views/weather.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -62,11 +63,23 @@ class MyApp extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  print("Button 3 pressed");
+
+
+
+              Builder(
+                builder: (context) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (_) => WeatherHomePage(), // your target page
+                        ),
+                      );
+                    },
+                    child: const Text("Button 2"),
+                  );
                 },
-                child: const Text("Button 3"),
               ),
               const SizedBox(height: 10),
               ElevatedButton(
