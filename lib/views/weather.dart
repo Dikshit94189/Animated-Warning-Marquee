@@ -20,6 +20,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
   Map<String, dynamic>? weatherData;
   bool loading = false;
 
+  //  Access Api Key https://home.openweathermap.org/api_keys
   final String apiKey = "b1b15e88fa797225412429c1c50c122a1"; // <--- Replace this
 
   Future<void> _fetchWeatherByCity(String city) async {
