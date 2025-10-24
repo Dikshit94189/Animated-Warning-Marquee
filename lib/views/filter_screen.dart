@@ -1,13 +1,12 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 
 class FilterApp extends StatelessWidget {
   const FilterApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,33 +18,37 @@ class FilterApp extends StatelessWidget {
 
 class FilterHomePage extends StatefulWidget {
   const FilterHomePage({super.key});
+
   @override
   State<FilterHomePage> createState() => _FilterHomePageState();
 }
 
 class _FilterHomePageState extends State<FilterHomePage> {
-  File? _imageFile;
+  Uint8List? _imageBytes;
   bool _isSepia = false;
 
+  final ImagePicker _picker = ImagePicker();
+
   Future<void> _pickImage() async {
-    final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (picked != null) {
+    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      Uint8List bytes;
+      if (kIsWeb) {
+        bytes = await pickedFile.readAsBytes(); // Web uses bytes
+      } else {
+        bytes = await pickedFile.readAsBytes(); // Mobile also reads as bytes
+      }
       setState(() {
-        _imageFile = File(picked.path);
+        _imageBytes = bytes;
       });
     }
   }
 
-  Future<Uint8List?> _applyFilter(File file) async {
-    final bytes = await file.readAsBytes();
+  Future<Uint8List?> _applyFilter(Uint8List bytes) async {
     final original = img.decodeImage(bytes);
     if (original == null) return null;
-    img.Image filtered;
-    if (_isSepia) {
-      filtered = img.sepia(original);
-    } else {
-      filtered = img.grayscale(original);
-    }
+
+    final filtered = _isSepia ? img.sepia(original) : img.grayscale(original);
     return Uint8List.fromList(img.encodeJpg(filtered));
   }
 
@@ -55,21 +58,18 @@ class _FilterHomePageState extends State<FilterHomePage> {
       appBar: AppBar(
         title: const Text('Pick & Filter'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.photo),
-            onPressed: _pickImage,
-          ),
-          if (_imageFile != null) IconButton(
-            icon: const Icon(Icons.filter),
-            onPressed: () => setState(() => _isSepia = !_isSepia),
-          ),
+          IconButton(icon: const Icon(Icons.photo), onPressed: _pickImage),
+          if (_imageBytes != null)
+            IconButton(
+                icon: const Icon(Icons.filter),
+                onPressed: () => setState(() => _isSepia = !_isSepia)),
         ],
       ),
       body: Center(
-        child: _imageFile == null
+        child: _imageBytes == null
             ? const Text('No image selected.')
             : FutureBuilder<Uint8List?>(
-          future: _applyFilter(_imageFile!),
+          future: _applyFilter(_imageBytes!),
           builder: (ctx, snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
               return const CircularProgressIndicator();
