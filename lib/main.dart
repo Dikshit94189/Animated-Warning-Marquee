@@ -1,5 +1,6 @@
 import 'package:animatedwarningmarquee/views/ai_caption_generator.dart';
 import 'package:animatedwarningmarquee/views/animated_warning_marquee.dart';
+import 'package:animatedwarningmarquee/views/filter_screen.dart';
 import 'package:animatedwarningmarquee/views/lottie_task.dart';
 import 'package:animatedwarningmarquee/views/quotes_home_screen.dart';
 import 'package:animatedwarningmarquee/views/weather.dart';
@@ -73,7 +74,14 @@ class HomePage extends StatelessWidget {
                 CupertinoPageRoute(builder: (_) => const CounterHomePage()),
               ),
               child: const Text("Button 5"),
-            ),
+                ),const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (_) => const FilterApp()),
+                  ),
+                  child: const Text("Button 6"),
+                ),
           ],
         ),
       ),
