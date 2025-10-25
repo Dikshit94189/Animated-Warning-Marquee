@@ -42,12 +42,3 @@ android {
 flutter {
     source = "../.."
 }
-
-task printSdkVersions {
-    doLast {
-        println "Compile SDK: $compileSdk"
-        println "Min SDK: $defaultConfig.minSdk"
-        println "Target SDK: $defaultConfig.targetSdk"
-        println "NDK Version: $ndkVersion"
-    }
-}

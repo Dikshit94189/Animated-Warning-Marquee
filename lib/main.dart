@@ -1,4 +1,5 @@
 import 'package:animatedwarningmarquee/views/ai_caption_generator.dart';
+import 'package:animatedwarningmarquee/views/animated_box.dart';
 import 'package:animatedwarningmarquee/views/animated_warning_marquee.dart';
 import 'package:animatedwarningmarquee/views/quotes_home_screen.dart';
 import 'package:animatedwarningmarquee/views/weather.dart';
@@ -108,8 +109,44 @@ class MyApp extends StatelessWidget {
                 },
                 child: const Text("Button 5"),
               ),
+<<<<<<< Updated upstream
             ],
           ),
+=======
+              child: const Text("Button 3"),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (_) => const QuoteHomePage()),
+              ),
+              child: const Text("Button 4"),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (_) => const CounterHomePage()),
+              ),
+              child: const Text("Button 5"),
+                ),const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (_) => const FilterApp()),
+                  ),
+                  child: const Text("Button 6"),
+                ),const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(builder: (_) =>const AnimatedBoxPage()),
+                  ),
+                  child: const Text("Button 6"),
+                ),
+          ],
+>>>>>>> Stashed changes
         ),
       ),
     );
