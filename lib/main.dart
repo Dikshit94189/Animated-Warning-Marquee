@@ -1,4 +1,5 @@
 import 'package:animatedwarningmarquee/views/ai_caption_generator.dart';
+import 'package:animatedwarningmarquee/views/animated_box.dart';
 import 'package:animatedwarningmarquee/views/animated_warning_marquee.dart';
 import 'package:animatedwarningmarquee/views/filter_screen.dart';
 import 'package:animatedwarningmarquee/views/lottie_task.dart';
@@ -74,7 +75,8 @@ class HomePage extends StatelessWidget {
                 CupertinoPageRoute(builder: (_) => const CounterHomePage()),
               ),
               child: const Text("Button 5"),
-                ),const SizedBox(height: 10),
+                ),
+            const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () => Navigator.push(
                     context,
@@ -82,6 +84,15 @@ class HomePage extends StatelessWidget {
                   ),
                   child: const Text("Button 6"),
                 ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (_) => const AnimatedBoxPage()),
+              ),
+              child: const Text("Button 6"),
+            ),
+
           ],
         ),
       ),
