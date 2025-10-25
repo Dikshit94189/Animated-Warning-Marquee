@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+gradle-wrapper.jar
+/.gradle
+/captures/
+/gradlew
+/gradlew.bat
+/local.properties
+GeneratedPluginRegistrant.java
+.cxx/
+
+# Remember to never publicly share your keystore.
+# See https://flutter.dev/to/reference-keystore
+key.properties
+**/*.keystore
+**/*.jks
+=======
 # Miscellaneous
 *.class
 *.log
@@ -43,3 +59,4 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+>>>>>>> f87a05b2567d79bcef0e17b7a676b6ae0c6cd8f8
